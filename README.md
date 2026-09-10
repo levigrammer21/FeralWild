@@ -1,12 +1,12 @@
-# Feralwild — v1.0.0
+# Feralwild — v1.1.1
 
-A mobile-first idle creature RPG for a small circle of players. Everything in this package goes directly in your GitHub repository root, including the two image sheets. No installation, terminal, package manager, or build command is needed to host the game.
+A mobile-first idle creature RPG for a small circle of players. Everything in this package goes directly in your GitHub repository root, including the creature and item image sheets. No installation, terminal, package manager, or build command is needed to host the game.
 
 ## Put the game online from your phone
 
-1. Extract `Feralwild-v1.0.0.zip` with your phone's Files app.
+1. For a new installation, use the original full package and then apply the v1.1.0 update followed by v1.1.1. For an existing v1.1.0 installation, extract `Feralwild-v1.1.1-update.zip` and upload its files over the files with the same names. `UPDATE.md` explains this update.
 2. Create your GitHub repository. A public repository works with GitHub Free Pages. Choose a name such as `feralwild` and initialize it with a README if GitHub asks.
-3. In the repository, choose **Add file → Upload files**. Select the extracted files, including both PNGs. Upload the files themselves, **not the ZIP and not an enclosing folder**. Use your phone browser's **Request Desktop Site** option if GitHub hides the upload controls. Commit to `main`.
+3. In the repository, choose **Add file → Upload files**. Select the extracted files, including all PNGs. Upload the files themselves, **not the ZIP and not an enclosing folder**. Use your phone browser's **Request Desktop Site** option if GitHub hides the upload controls. Commit to `main`.
 4. Open **Settings → Pages → Build and deployment**. Select **Deploy from a branch**, branch **main**, folder **/(root)**, then Save.
 5. Open the game URL GitHub shows when publishing completes. Play in that browser URL, not by opening the downloaded HTML in Files. You can add the page to your phone's Home Screen.
 
@@ -39,7 +39,7 @@ The rules restrict private saves to their owner, validate public field shapes, e
 ## First session
 
 - Choose Bramblekit, Pebbleback, or Glimmermoth. Starters have fixed 60 IVs; wild Ferals roll all four independently.
-- You begin with crafted snares, food, medicine, and treats. Your first hunt starts with your trainer present.
+- You begin with crafted snares, food, medicine, and treats. A short, skippable guide introduces the game. Your team stays out of combat until you choose Start hunt.
 - Watch an enemy's HP. Tap **Hold attacks** to stop your team's attacks, then tap that enemy's **Snare** button. Enemies continue attacking while you hold. Release the hold to resume attacks.
 - Capture two more Ferals, retreat, and add them from **Ferals** to make a three-member team.
 - In **Skills**, gather timber, ore, herbs/fiber, and fish. The trainer switches to that work; your team keeps fighting without trainer food or capturing.
@@ -54,6 +54,7 @@ Retreating preserves any surviving wild encounter in that region. Repeatedly sta
 - 10 regions, 100 named Feral species, and artwork for every species.
 - 8 player skills, 147 item definitions, and 90 recipes.
 - 10 Champions, three requirements each, badge progression, and Feral level caps through 100.
+- A peaceful new-character start, a replayable three-step tutorial, illustrated item families, hidden undiscovered portraits, and configurable synthesized sound effects.
 - Real-time three-Feral teams, individual attack/ability timers, threat, taunt, focus targeting, guard, hitsplats, healing, critical hits, and elemental statuses.
 - Permanent IVs, appraisal, independent Titanblood and elemental rolls, Morale, and individual Bond.
 - Four equipment slots, six crafting qualities, salvage, and three special raid relics.
@@ -79,8 +80,8 @@ Marketplace purchases, listings, cancellations, and proceeds claims are transact
 `data.mjs` holds the catalog and principal balance values. `BALANCE`, XP curves, quality weights, species profiles, recipe costs, and timers can be adjusted there. Species base stats grow approximately 5% per region, with separate stat distributions and move/passive combinations.
 
 - IV multiplier: `0.5 + (IV - 1) / 99`. IVs remain integers 1–100 forever.
-- Titanblood: independent base probability `1 / 12000`, multiplying rolled stats by `1.10`.
-- Elemental: independent base probability `1 / 180`.
+- Titanblood: independent base probability `1 / 250`, multiplying rolled stats by `1.10`.
+- Elemental: independent base probability `1 / 100`.
 - Titanblood beacon: triple Titanblood probability for 30 minutes; expensive and still rare.
 - Elemental incense: four times elemental probability, biased entirely to its specified element, for 30 minutes.
 - Speed interval: `max(1, 10 / (1 + 9 * (max(1, Speed) - 1) / 49))` seconds.
@@ -111,8 +112,11 @@ When changing the save format, add and test an explicit migration before raising
 | `firestore.rules` | Rules to publish in Firebase Console |
 | `service-worker.js` | Offline app-file caching after the first online visit |
 | `ferals-a.png`, `ferals-b.png` | Two original 50-portrait creature sheets |
+| `item-icons.png`, `item-art.mjs` | Illustrated item families and catalog mapping |
+| `audio.mjs` | Original synthesized effects, volume, and gesture-safe audio |
+| `alerts.mjs` | Optional browser rare-encounter notifications |
 | `icon.svg` | Game mark |
-| `test.mjs`, `test-online.mjs` | Engine and mocked cloud transaction regression tests |
+| `test.mjs`, `test-online.mjs`, `test-update.mjs` | Engine and mocked cloud transaction regression tests |
 | `TESTING.md` | Verification performed and remaining live checks |
 
 Fonts use Google Fonts when available and fall back to installed sans-serif fonts. Creature illustrations were created using built-in image generation as two aligned 5×10 portrait sheets; the prompts specified the 100 named species in catalog order, hand-painted fantasy style, navy backgrounds, no text, and consistent framing.
@@ -123,3 +127,15 @@ Fonts use Google Fonts when available and fall back to installed sans-serif font
 - Firebase email/password: https://firebase.google.com/docs/auth/web/password-auth
 - Firestore rules: https://firebase.google.com/docs/firestore/security/get-started
 - Firestore transactions: https://firebase.google.com/docs/firestore/manage-data/transactions
+
+## v1.1 rare protection and offline timing
+
+**Pause for Elemental or Titanblood (online only)** is enabled by default in Settings. When selected, a qualifying encounter pauses both teams while the game is visible, including attacks, status damage, Morale loss, and automatic capture. Trainer gathering/crafting continues. Choose **Join & resume** or disable the preference to resume.
+
+Hiding or closing the game resumes rare-paused combat during offline simulation. Offline encounters never trigger rare protection, and the final offline encounter does not trigger a delayed pause on return. Ferals can defeat rare enemies while away. Rare encounters remain in the journal. The shared twelve-hour allowance applies across background checks and save/reload. Saving alone never discards unprocessed time.
+
+In-game rare alerts require no permission. Optional browser notifications require permission and only trigger while the game is visible. There are no offline rare alerts or closed-browser push notifications.
+
+Apex styles are now 4 Melee, 3 Ranged, and 3 Magic. Base stats and each individual's IVs, level, equipment, and Bond are retained. A Feral portrait is revealed once that species is encountered or owned. The three starter choices are visible during initial selection.
+
+Sounds start after a player gesture and are muted when the page is hidden. Settings includes a sound toggle, volume slider, and test button. Item illustrations were generated as one 6×6 atlas of 36 deliberately reusable item-family icons: timber, ores, fish, herbs, equipment, snares, food, care supplies, lenses, salvage, essence, keys, and incense.

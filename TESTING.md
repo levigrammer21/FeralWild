@@ -1,3 +1,28 @@
+# Feralwild v1.1.1 — update verification
+
+All existing 18 engine checks and 6 mocked online transaction checks still pass. `test-update.mjs` has 13 passing checks for:
+
+- Peaceful new-character start and tutorial defaults.
+- Idempotent migration retaining existing Ferals, equipment references, inventory, skills, and teams.
+- Exact 1/100 Elemental and 1/250 Titanblood probabilities, plus a 100,000-roll sample.
+- Four Melee, three Ranged, and three Magic Apex species.
+- Discovery tracking and complete item-art mappings.
+- Rare protection freezing attacks, status damage, food, snares, automatic capture, and Morale.
+- Offline gathering continues while existing rare pauses are released.
+- A shared 12-hour budget across background updates and save/reload, without duplicated rewards.
+- Twelve-hour hunts continue through new offline rares, without a delayed pause on return.
+- Foreground catch-up preserves selected protection; disabling the setting releases it.
+- Explicit resume and disabling future protection.
+- Offline crafting with exact material consumption and no replay after reload.
+
+Previous v1.1.0 phone browser checks verified the upgraded existing save, illustrated inventory, hidden portraits for all ten undiscovered Crown species, the three tutorial steps and completion, sound controls, and Settings without horizontal page overflow. No game errors appeared in the inspected console log. The sound test control was exercised; sound quality on physical phone speakers was not evaluated.
+
+Live OS notification delivery on iOS/Android, closed-browser push, and live Firebase services were not tested. Closed-browser push is not implemented. v1.1.1 intentionally continues offline combat through rare encounters; this behavior is covered by engine tests. This logic and text patch was syntax-checked; no new phone browser check was performed. Firebase rules and account setup remain unchanged.
+
+The original verification record follows for context.
+
+---
+
 # Feralwild v1.0.0 — verification
 
 ## Automated checks completed
