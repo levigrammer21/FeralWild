@@ -1,27 +1,14 @@
-# Feralwild v1.1.0 update
+# Feralwild v1.1.1 update
 
-This ZIP contains only changed/new files. Apply it to your existing v1.0.0 game; it is not a separate full installation.
+Apply this small patch after v1.1.0. It contains only changed files.
 
-## Install from your phone
+1. Export a save backup from Settings.
+2. Extract this ZIP on your phone.
+3. Upload all extracted files to the existing GitHub repository root, replacing matching files. Keep every other file.
+4. After GitHub Pages updates, close and reopen the game. Settings should show v1.1.1.
 
-1. In the current game, open Settings and export a save backup.
-2. Extract this update ZIP.
-3. In GitHub, upload all extracted files directly into the existing repository root, replacing files with the same names. Keep all other existing files, including the original creature pictures, Firebase configuration, and rules.
-4. Commit the upload. When GitHub Pages finishes updating, close the old game tab and reopen the game. Verify **v1.1.0** in Settings.
+Rare encounter pausing now only applies while the game is visible and the setting is selected. This applies to both Titanblood and Elemental Ferals. Offline hunting continues, including if you leave during a rare pause. Turning the setting off also releases a current rare pause. Offline rares are logged, but do not trigger alerts or a delayed pause on return.
 
-Your existing save is upgraded automatically. You do not need a new character, a new Firebase project, or new security rules.
+The twelve-hour offline cap and your existing progress are retained. No Firebase changes are needed.
 
-## Changes
-
-- New characters start peacefully with a short, skippable tutorial. Existing players can replay it from Settings.
-- Item pictures in inventory, gathering/crafting, care, and equipment inspection.
-- Undiscovered Feral portraits hidden until encountered or owned.
-- Elemental chance: **1 in 100**. Titanblood chance: **1 in 250**. Independent rolls.
-- Default-on rare encounter protection freezes both sides and preserves the exact encounter, including during offline progress. Trainer skilling continues. Use **Join & resume** when ready.
-- Offline progress keeps the **12-hour cap**, shared across background checks. Fixed a save-timestamp issue that could discard unprocessed offline time.
-- Apex distribution: **4 Melee / 3 Ranged / 3 Magic**. No individual IVs or progression are reset.
-- Sound effects for combat, healing, gathering, crafting, captures, victories, and rare encounters; mute and volume controls in Settings.
-
-In-game rare alerts always work. Browser notifications are optional and require permission plus a page that can still run. If the browser is closed or suspended, the rare encounter is protected during catch-up and the alert appears when you return; live closed-browser push requires additional backend work.
-
-Verification: 36 automated checks passed, with targeted phone browser checks.
+Verification: all 37 automated engine, save, update, and mocked online transaction checks passed. App and notification modules passed syntax checks.

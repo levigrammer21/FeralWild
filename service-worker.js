@@ -1,4 +1,4 @@
-const CACHE='feralwild-1.1.0';
+const CACHE='feralwild-1.1.1';
 const FILES=['./','index.html','game.css','app.mjs','engine.mjs','data.mjs','saves.mjs','online.mjs','firebase-config.mjs','icon.svg','ferals-a.png','ferals-b.png','item-icons.png','item-art.mjs','audio.mjs','alerts.mjs'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('feralwild-')&&k!==CACHE).map(k=>caches.delete(k))))));

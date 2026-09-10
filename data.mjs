@@ -1,4 +1,4 @@
-export const VERSION='1.1.0';
+export const VERSION='1.1.1';
 export const BALANCE=Object.freeze({schema:1,maxLevel:100,offlineHours:12,step:.25,titanChance:1/250,elementChance:1/100,titanMultiplier:1.10,raidKeyChance:1/6500,moralePerSecond:1/450,lowMoralePenalty:.45,captureCooldown:3,maxLog:160,saveSeconds:15,qualityMultipliers:[.8,1,1.15,1.35,1.65,2],caps:[10,20,30,40,50,60,70,80,90,100,100]});
 export const STYLES=['Melee','Ranged','Magic'];
 export const ELEMENTS={Fire:{color:'#ff9669',effect:'Burns for 3% Attack each second for 6s.'},Ice:{color:'#96d9ff',effect:'Slows Speed by 20% for 5s.'},Lightning:{color:'#f1dc81',effect:'Every fifth attack chains to a second foe.'},Poison:{color:'#b2de81',effect:'Poisons for 2% max HP each second for 4s (capped at 30% Attack).'}};
