@@ -1,4 +1,4 @@
-# Feralwild — v1.1.1
+# Feralwild — v1.1.2
 
 A mobile-first idle creature RPG for a small circle of players. Everything in this package goes directly in your GitHub repository root, including the creature and item image sheets. No installation, terminal, package manager, or build command is needed to host the game.
 
@@ -139,3 +139,7 @@ In-game rare alerts require no permission. Optional browser notifications requir
 Apex styles are now 4 Melee, 3 Ranged, and 3 Magic. Base stats and each individual's IVs, level, equipment, and Bond are retained. A Feral portrait is revealed once that species is encountered or owned. The three starter choices are visible during initial selection.
 
 Sounds start after a player gesture and are muted when the page is hidden. Settings includes a sound toggle, volume slider, and test button. Item illustrations were generated as one 6×6 atlas of 36 deliberately reusable item-family icons: timber, ores, fish, herbs, equipment, snares, food, care supplies, lenses, salvage, essence, keys, and incense.
+
+## Install on your phone (v1.1.2)
+
+Apply v1.1.2 after v1.1.1. Open Settings → Install Feralwild. iPhone: Safari → Share → Add to Home Screen → Add (keep Open as Web App enabled if shown). Android: use the installation prompt or the browser menu’s Install app / Add to Home screen option. Open the new home-screen icon. Export or cloud-sync your save first; restore it if the installed app opens a new journey. Load online once to fill the offline cache. See UPDATE.md for upload and installation instructions.
