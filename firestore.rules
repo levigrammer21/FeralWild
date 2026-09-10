@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+ match /databases/{database}/documents {
+  function signed() { return request.auth != null; }
+  function owner(uid) { return signed() && request.auth.uid == uid; }
+  function playerAdvanced(uid) {
+   return getAfter(/databases/$(database)/documents/players/$(uid)).data.revision == get(/databases/$(database)/documents/players/$(uid)).data.revision + 1;
+  }
+  match /players/{uid} {
+   allow read: if owner(uid);
+   allow create: if owner(uid) && request.resource.data.keys().hasOnly(['save','revision','name','updatedAt']) && request.resource.data.revision == 1 && request.resource.data.save is string && request.resource.data.save.size() < 900000 && request.resource.data.name is string && request.resource.data.name.size() <= 24;
+   allow update: if owner(uid) && request.resource.data.keys().hasOnly(['save','revision','name','updatedAt']) && request.resource.data.revision == resource.data.revision + 1 && request.resource.data.save is string && request.resource.data.save.size() < 900000 && request.resource.data.name is string && request.resource.data.name.size() <= 24;
+   allow delete: if false;
+  }
+  match /scores/{uid} {
+   allow read: if signed();
+   allow write: if owner(uid) && request.resource.data.keys().hasOnly(['name','champions','collection','skillXP','raids','updatedAt']) && request.resource.data.name is string && request.resource.data.name.size() <= 24 && request.resource.data.champions is int && request.resource.data.champions >= 0 && request.resource.data.champions <= 10 && request.resource.data.collection is int && request.resource.data.collection >= 0 && request.resource.data.collection <= 100 && request.resource.data.skillXP is number && request.resource.data.skillXP >= 0 && request.resource.data.skillXP < 1000000000000 && request.resource.data.raids is int && request.resource.data.raids >= 0;
+  }
+  match /market/{id} {
+   allow read: if signed();
+   allow create: if signed() && request.resource.data.keys().hasOnly(['seller','sellerName','item','count','price','status','createdAt']) && request.resource.data.seller == request.auth.uid && request.resource.data.sellerName is string && request.resource.data.sellerName.size() <= 24 && request.resource.data.item is string && request.resource.data.item.size() < 40 && request.resource.data.count is int && request.resource.data.count > 0 && request.resource.data.count <= 100000 && request.resource.data.price is int && request.resource.data.price > 0 && request.resource.data.price <= 100000000 && request.resource.data.status == 'open' && playerAdvanced(request.auth.uid);
+   allow update: if signed() && resource.data.status == 'open' && playerAdvanced(request.auth.uid) && (
+    (resource.data.seller == request.auth.uid && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status']) && request.resource.data.status == 'cancelled') ||
+    (resource.data.seller != request.auth.uid && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','buyer']) && request.resource.data.status == 'sold' && request.resource.data.buyer == request.auth.uid && getAfter(/databases/$(database)/documents/credits/$(resource.data.seller)).data.lastListing == id)
+   );
+   allow delete: if false;
+  }
+  function validPayout(uid) {
+   let listing = request.resource.data.lastListing;
+   let before = get(/databases/$(database)/documents/market/$(listing)).data;
+   let after = getAfter(/databases/$(database)/documents/market/$(listing)).data;
+   return signed() && before.seller == uid && before.status == 'open' && after.status == 'sold' && after.buyer == request.auth.uid && request.resource.data.keys().hasOnly(['gold','lastListing']);
+  }
+  match /credits/{uid} {
+   allow read: if signed();
+   allow create: if validPayout(uid) && request.resource.data.gold == math.floor(get(/databases/$(database)/documents/market/$(request.resource.data.lastListing)).data.price * 0.95);
+   allow update: if (owner(uid) && request.resource.data.keys().hasOnly(['gold']) && request.resource.data.gold == 0 && playerAdvanced(uid)) || (validPayout(uid) && request.resource.data.gold == resource.data.gold + math.floor(get(/databases/$(database)/documents/market/$(request.resource.data.lastListing)).data.price * 0.95));
+   allow delete: if false;
+  }
+ }
+}

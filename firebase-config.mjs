@@ -1,0 +1,1 @@
+export const firebaseConfig={apiKey:'AIzaSyCW3f14jUYORbA3ctLI0_KIjFIMpk40YYM',authDomain:'petmmo-61e87.firebaseapp.com',projectId:'petmmo-61e87',storageBucket:'petmmo-61e87.firebasestorage.app',messagingSenderId:'557839692983',appId:'1:557839692983:web:7781b135dad49e85e24932'};
