@@ -1,3 +1,11 @@
+# v1.1.2 installation verification
+
+Run `node test-install.mjs`. Checks cover Safari/Android instructions, one-use browser prompts, dismissal, expired prompt fallback, installed state, relative manifest scope/start URL, icon PNG sizes, and presence of every offline cache asset. These pass, along with all 37 existing checks. App, install module, and service-worker syntax checks pass.
+
+Physical-phone acceptance: after uploading, open the HTTPS game in Safari or Chrome, install from Settings/browser menu, and open its home-screen icon. Check that browser chrome is absent and controls clear the notch/home indicator. Verify or restore your save, let the game load online, then reopen without a network connection to check core play. Reconnect for cloud features. Physical-device installation and the new Settings panel have not been browser-tested in this patch.
+
+---
+
 # Feralwild v1.1.1 — update verification
 
 All existing 18 engine checks and 6 mocked online transaction checks still pass. `test-update.mjs` has 13 passing checks for:

@@ -1,14 +1,32 @@
-# Feralwild v1.1.1 update
+# Feralwild v1.1.2 — install on your phone
 
-Apply this small patch after v1.1.0. It contains only changed files.
+Apply this patch after v1.1.1. Only changed and new files are included.
 
-1. Export a save backup from Settings.
-2. Extract this ZIP on your phone.
-3. Upload all extracted files to the existing GitHub repository root, replacing matching files. Keep every other file.
-4. After GitHub Pages updates, close and reopen the game. Settings should show v1.1.1.
+1. Export your save from Settings.
+2. Extract the ZIP and upload every included file into your existing GitHub repository root, replacing matching files. Keep all other files.
+3. Wait for GitHub Pages to update, then close all game tabs and reopen the game. Settings should show v1.1.2.
+4. In Settings, tap Install Feralwild.
 
-Rare encounter pausing now only applies while the game is visible and the setting is selected. This applies to both Titanblood and Elemental Ferals. Offline hunting continues, including if you leave during a rare pause. Turning the setting off also releases a current rare pause. Offline rares are logged, but do not trigger alerts or a delayed pause on return.
+## iPhone / iPad
 
-The twelve-hour offline cap and your existing progress are retained. No Firebase changes are needed.
+Open the game in Safari. Tap Share → Add to Home Screen. Leave Open as Web App enabled if shown, then tap Add. Launch from the new home-screen icon.
 
-Verification: all 37 automated engine, save, update, and mocked online transaction checks passed. App and notification modules passed syntax checks.
+## Android
+
+Use the Install Feralwild button in Settings. If the browser does not show its installation prompt, use Chrome’s ⋮ menu → Install app or Add to Home screen, then confirm.
+
+## Your existing journey
+
+Before your first app launch, export a backup or sync your cloud save. If the installed app opens a new journey, import your backup or load your cloud journey. Browser and installed-app storage behavior can differ by platform. Do not clear your original browser save until you have verified your progress in the app.
+
+Load the game online once so the offline cache can finish downloading. Core play can then load without a connection; cloud saves and online features still need internet. Installation requires the HTTPS GitHub Pages address. Your 12-hour offline progression cap remains in effect.
+
+## Included changes
+
+- App manifest with relative URLs for GitHub project hosting.
+- Dedicated Android and Apple home-screen icons using the existing Feralwild emblem.
+- Standalone app launch and phone notch spacing.
+- Settings installation control, browser prompt handling, and Safari instructions.
+- Installation files included in the offline cache; visible version 1.1.2.
+
+Validation: installation flow and manifest/cache checks pass; all 37 existing checks pass. JavaScript syntax checks pass. Physical iPhone/Android installation has not been tested.
