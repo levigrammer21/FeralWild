@@ -3,7 +3,7 @@ import * as E from './engine.mjs';
 import * as D from './data.mjs';
 import {encode,decode} from './saves.mjs';
 let checks=0;function check(name,fn){fn();checks++;console.log('PASS',name);}
-const game=()=>{const s=E.newGame(42);E.startGame(s,0,'Tester');return s;};
+const game=()=>{const s=E.newGame(42);E.startGame(s,0,'Tester');s.trainer='combat';s.settings.pauseRare=false;return s;};
 check('100 uniquely named species and 10 complete regions',()=>{assert.equal(D.SPECIES.length,100);assert.equal(new Set(D.SPECIES.map(x=>x.name)).size,100);for(const a of D.AREAS)assert.equal(D.SPECIES.filter(x=>x.area===a.id).length,10);});
 check('Every recipe ingredient, species move, passive, and drop resolves',()=>{for(const r of D.RECIPES){assert(D.ITEMS[r.id]);assert(D.SKILLS[r.skill]);for(const id of Object.keys(r.cost))assert(D.ITEMS[id]);}for(const sp of D.SPECIES){assert(D.ABILITIES[sp.ability]);assert(D.PASSIVES[sp.passive]);assert(D.ITEMS[sp.drop]);}});
 check('IV endpoints and speed hard boundaries',()=>{assert.equal(D.ivMultiplier(1),.5);assert.equal(D.ivMultiplier(100),1.5);assert.equal(D.attackInterval(1),10);assert.equal(D.attackInterval(50),1);assert.equal(D.attackInterval(999),1);assert.equal(D.attackInterval(-20),10);});

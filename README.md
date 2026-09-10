@@ -1,10 +1,10 @@
-# Feralwild — v1.1.2
+# Feralwild — v1.1.0
 
 A mobile-first idle creature RPG for a small circle of players. Everything in this package goes directly in your GitHub repository root, including the creature and item image sheets. No installation, terminal, package manager, or build command is needed to host the game.
 
 ## Put the game online from your phone
 
-1. For a new installation, use the original full package and then apply the v1.1.0 update followed by v1.1.1. For an existing v1.1.0 installation, extract `Feralwild-v1.1.1-update.zip` and upload its files over the files with the same names. `UPDATE.md` explains this update.
+1. For a new installation, use the original full package and then apply the v1.1.0 update. For an existing installation, extract `Feralwild-v1.1.0-update.zip` and upload its files over the files with the same names. `UPDATE.md` explains this update.
 2. Create your GitHub repository. A public repository works with GitHub Free Pages. Choose a name such as `feralwild` and initialize it with a README if GitHub asks.
 3. In the repository, choose **Add file → Upload files**. Select the extracted files, including all PNGs. Upload the files themselves, **not the ZIP and not an enclosing folder**. Use your phone browser's **Request Desktop Site** option if GitHub hides the upload controls. Commit to `main`.
 4. Open **Settings → Pages → Build and deployment**. Select **Deploy from a branch**, branch **main**, folder **/(root)**, then Save.
@@ -130,16 +130,12 @@ Fonts use Google Fonts when available and fall back to installed sans-serif font
 
 ## v1.1 rare protection and offline timing
 
-**Pause for Elemental or Titanblood (online only)** is enabled by default in Settings. When selected, a qualifying encounter pauses both teams while the game is visible, including attacks, status damage, Morale loss, and automatic capture. Trainer gathering/crafting continues. Choose **Join & resume** or disable the preference to resume.
+**Pause for Elemental or Titanblood** is enabled by default in Settings. On a qualifying wild encounter, both teams stop before attacking, and status damage, Morale loss, and automatic capture stop. Trainer gathering/crafting continues. The exact encounter is saved until you choose **Join & resume**. Turning the preference off prevents future automatic pauses; an already protected encounter still requires manual resumption.
 
-Hiding or closing the game resumes rare-paused combat during offline simulation. Offline encounters never trigger rare protection, and the final offline encounter does not trigger a delayed pause on return. Ferals can defeat rare enemies while away. Rare encounters remain in the journal. The shared twelve-hour allowance applies across background checks and save/reload. Saving alone never discards unprocessed time.
+This works when the game is closed: catch-up simulates the hunt until the rare appears, preserves it, and continues the trainer's remaining activity time. The shared twelve-hour allowance also applies when the page is backgrounded and performs incremental updates. Saving by itself never advances the simulation timestamp or discards unprocessed time.
 
-In-game rare alerts require no permission. Optional browser notifications require permission and only trigger while the game is visible. There are no offline rare alerts or closed-browser push notifications.
+In-game rare alerts require no browser permission. Optional browser notifications can appear while a background page is able to run. A closed or suspended browser cannot deliver a live push notification with this client-only build; the encounter is still preserved and shown on return. Click **Enable browser notifications** in Settings to request permission on supported devices. No notification permission is requested automatically.
 
 Apex styles are now 4 Melee, 3 Ranged, and 3 Magic. Base stats and each individual's IVs, level, equipment, and Bond are retained. A Feral portrait is revealed once that species is encountered or owned. The three starter choices are visible during initial selection.
 
 Sounds start after a player gesture and are muted when the page is hidden. Settings includes a sound toggle, volume slider, and test button. Item illustrations were generated as one 6×6 atlas of 36 deliberately reusable item-family icons: timber, ores, fish, herbs, equipment, snares, food, care supplies, lenses, salvage, essence, keys, and incense.
-
-## Install on your phone (v1.1.2)
-
-Apply v1.1.2 after v1.1.1. Open Settings → Install Feralwild. iPhone: Safari → Share → Add to Home Screen → Add (keep Open as Web App enabled if shown). Android: use the installation prompt or the browser menu’s Install app / Add to Home screen option. Open the new home-screen icon. Export or cloud-sync your save first; restore it if the installed app opens a new journey. Load online once to fill the offline cache. See UPDATE.md for upload and installation instructions.
